@@ -1,8 +1,8 @@
 [
     {
-        "title": "Do Homework", "dueDate": "April 22"
+        "id": 0, "title": "Start Homework", "text": "April 22" 
     },
     {
-        "title": "Do Code Drills", "dueDate": "April 23"
+        "id": 1, "title": "Do Code Drills", "text": "April 23"
     }
 ]

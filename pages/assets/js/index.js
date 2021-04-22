@@ -1,3 +1,5 @@
+// var fs = require('fs');
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -25,25 +27,32 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
-const getNotes = () =>
-  fetch('/api/notes', {
+const getNotes = async () => 
+  await fetch('/api/notes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   });
 
-const saveNote = (note) =>
-  fetch('/api/notes', {
+const saveNote = async (note) => {
+//   fs.writeFile('../database/db.json', JSON.stringify(req.body), function (err) {
+//     console.log(err);
+// });
+// noteData.push(note);
+  await fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  });
+  }).then(response => response.text())  // convert to json
+    .then(text => console.log(text))    //print data to console
+    .catch(err => console.log('Request Failed', err)); // Catch errors
+}
 
-const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
+const deleteNote = async (id) =>
+  await fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
