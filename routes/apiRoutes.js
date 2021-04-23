@@ -1,9 +1,9 @@
 const path = require('path');
-const noteData = require('../database/db.json');
+const noteData = require('../db/db.json');
 const express = require('express');
 const fs = require('fs');
 module.exports = (app) => {
-    app.use(express.static(__dirname + '/../database/'));
+    app.use(express.static(__dirname + '/../db/'));
     // Read Notes
     app.get('/api/notes', (req, res) => {
         res.json(noteData);
@@ -13,7 +13,7 @@ module.exports = (app) => {
     // Add Note
     app.post('/api/notes', (req, res) => {
         res.send('Got a POST request');
-        fs.readFile('./database/db.json',function(err, content){
+        fs.readFile('./db/db.json',function(err, content){
             noteData.push(req.body);
             var notes = JSON.parse(content);
             notes.push(req.body);
@@ -21,7 +21,7 @@ module.exports = (app) => {
                 return console.log(err);
             }
             console.log(notes);
-            fs.writeFile('./database/db.json', JSON.stringify(notes), function(err, data) {
+            fs.writeFile('./db/db.json', JSON.stringify(notes), function(err, data) {
                 console.log(data);
                 if(err) {
                     return console.log(err);
