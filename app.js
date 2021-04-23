@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 bodyParser = require('body-parser');
 // support parsing of application/json type post data
