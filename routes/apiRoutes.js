@@ -34,10 +34,29 @@ module.exports = (app) => {
 
     // Delete Note
     app.delete('/api/notes/:id', (req, res) => {
-        res.send('Got a delete request');
-        const note = req.body
-        console.log(note);
-        console.log(res);
+        res.send('Got a DELETE request');
+        
+        fs.readFile('./db/db.json',function(err, content){
+            const note = req.body;
+            var notes = JSON.parse(content);
+            noteData.splice(noteData.findIndex(function(i){
+                return i.id === note.id;
+            }), 1);
+            console.log(noteData);
+            var deletedNotes = notes.filter(function(item) {
+                return item.id != parseInt(note.id);
+            })
+            // noteData.push(deletedNotes);
+            if(err) {
+                return console.log(err);
+            }
+            fs.writeFile('./db/db.json', JSON.stringify(deletedNotes), function(err, data) {
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("The file was saved!");
+            });
+        })
         res.json(true);
     })
 };
