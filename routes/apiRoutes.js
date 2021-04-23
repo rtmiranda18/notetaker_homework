@@ -1,4 +1,4 @@
-const noteData = require('../database/db.json');
+const noteData = require('../db/db.json');
 
 module.exports = (app) => {
     // Read Notes
