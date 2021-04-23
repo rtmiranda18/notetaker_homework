@@ -39,7 +39,11 @@ const saveNote = (note) =>
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(note),
+    body: JSON.stringify({
+      id: parseInt(makeid(5)),
+      title: note.title,
+      text: note.text
+  })
   });
 
 const deleteNote = (id) =>

@@ -13,7 +13,7 @@ module.exports = (app) => {
     // Add Note
     app.post('/api/notes', (req, res) => {
         res.send('Got a POST request');
-        fs.readFile('./db/db.json',function(err, content){
+        fs.readFile('./db/db.json',function(err, content) {
             noteData.push(req.body);
             var notes = JSON.parse(content);
             notes.push(req.body);
